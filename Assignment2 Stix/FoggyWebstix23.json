@@ -1,0 +1,856 @@
+{
+  "type": "bundle",
+  "id": "bundle--ak946k1m-7a0t-4=pa9d-bc83-3f1fcvfdrgy",
+  "objects": [
+    {
+      "type": "malware",
+      "is_family": true,
+      "spec_version": "2.1",
+      "id": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920",
+      "created": "16 November 2021",
+      "modified": "15 April 2022",
+      "name": "FoggyWeb(NOBELIUM)",
+      "description": "FoggyWeb is a passive and highly-targeted backdoor capable of remotely exfiltrating sensitive information from a compromised Active Directory Federated Services (AD FS) server. It can also receive additional malicious components from a command-and-control (C2) server and execute them on the compromised server.",
+      "malware_types": [
+        "Backdoor targeting AD-FS"
+      ],
+      "primary_motivation": "organizational-gain"
+    },
+    
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--81cade27-7df8-4730-836b-62d880e6d9d3",
+      "created": "2021-11-16",
+      "modified": "2021-04-2022",
+      "name": "Microsoft, Inc.",
+      "identity_class": "organization",
+      "sectors": [
+        "technology"
+      ]
+    },
+    {
+      "type": "campaign",
+      "spec_version": "2.1",
+      "id": "campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+     "created": "2017-05-31",
+      "modified": "2021-07-11",
+      "name": "APT29",
+      "description": "APT29 is threat group that has been attributed to Russia's Foreign Intelligence Service (SVR).They have operated since at least 2008, often targeting government networks in Europe and NATO member countries, research institutes, and think tanks. APT29 reportedly compromised the Democratic National Committee starting in the summer of 2015",
+      "first_seen": "2021-05-01"
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id":  "attack-pattern--e13f3e6d-4f9c-4265-b1cf-f997a1bf7828",
+     "created": "2021-11-16",
+      "modified": "2022-04-15",
+      "name": "Execution",
+      "description": "FoggyWeb's loader can use API functions to load the FoggyWeb backdoor into the same Application Domain within which the legitimate AD FS managed code is executed",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mandiant-attack-lifecycle-model",
+          "phase_name": "initial-execution"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--e13f3e6d-4f9c-4265-b1cf-f997a1bf7827",
+      "created": "2021-11-16",
+      "modified": "2022-04-15",
+      "name": "Privilege Escalation",
+      "description": "Escalating privileges involves acquiring items (most often usernames and passwords) that will allow access to more resources within the network. APT1 predominantly uses publicly available tools to dump password hashes from victim systems in order to obtain legitimate user credentials.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mandiant-attack-lifecycle-model",
+          "phase_name": "escalate-privileges"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--7151c6d0-7e97-47ce-9290-087315ea3db7",
+      "created": "2021-11-16",
+      "modified": "2022-04-15",
+      "name": "Defence Evasion",
+      "description": "FoggyWeb can be decrypted in memory using a Lightweight Encryption Algorithm (LEA)-128 key and decoded using a XOR key.",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mandiant-attack-lifecycle-model",
+          "phase_name": "Defence Evasion"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--5728f45b-2eca-4942-a7f6-bc4267c1ab8d",
+      "created": "2021-11-16",
+      "modified": "2022-04-15",
+      "name": "Internal Reconnaisance",
+      "description": "In the Internal Reconnaissance stage ,FoggyWeb can configure custom listeners to passively monitor all incoming HTTP GET and POST requests sent to the AD FS server from the intranet/internet and intercept HTTP requests that match the custom URI patterns defined by the actor.FoggyWeb's loader can enumerate all Common Language Runtimes (CLRs) and running Application Domains in the compromised AD FS server's Microsoft.IdentityServer.ServiceHost.exe process.", 
+      "kill_chain_phases":[
+        {
+          "kill_chain_name": "mandiant-attack-lifecycle-model",
+          "phase_name": "Discovery"
+        }
+      ]
+    },
+    {
+      "type": "attack-pattern",
+      "spec_version": "2.1",
+      "id": "attack-pattern--0bea2358-c244-4905-a664-a5cdce7bb767",
+      "created": "2021-11-16",
+      "modified": "2022-04-15",
+      "name": "Creating Backdoor",
+      "description": "Once an APT 29 intruder has a foothold inside the network and a set of legitimate credentials, it is simple for the intruder to move around the network undetected. They can connect to shared resources on other systems.FoggyWeb can masquerade the output of C2 commands as a fake, but legitimately formatted WebP file FoggyWeb's loader has used DLL Search Order Hijacking to load malicious code instead of the legitimate version.dll during the Microsoft.IdentityServer.ServiceHost.exe execution process. That will help in creating Backdoor .",
+      "kill_chain_phases": [
+        {
+          "kill_chain_name": "mandiant-attack-lifecycle-model",
+          "phase_name": "command and control"
+        }
+      ]
+    },
+   
+    {
+      "type": "course-of-action",
+      "spec_version": "2.1",
+      "id": "course-of-action--70b3d5f6-374b-4488-8688-729b6eedac5b",
+      "created_by_ref": "identity--81cade27-7df8-4730-836b-62d880e6d9d3",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "name": "Analyze with Microsoft 365 Defender Toolset",
+      "description": "Protecting AD FS servers is key to mitigating NOBELIUM attacks. Detecting and blocking malware,attacker activity, and other malicious artifacts on AD FS servers can break critical steps in known NOBELIUM attack chains.",
+      "external_references": [
+        {
+          "source_name": "Trojan:Win32/FoggyWeb.A!dha",
+          "description": "Endpoint detection and response (EDR) capabilities in Microsoft Defender for Endpoint detect malicious behavior related to this malware which is surfaced as alerts with the following titles: A suspicious DLL was loaded by the ADFS service.Suspicious service launched.Suspicious file dropped.",
+          "url": "https://github.com/Azure/Azure-Sentinel/blob/master/Detections/MultipleDataSources/Nobelium_FoggyWeb.yaml"
+        }
+      
+      ]
+    },
+ {
+      "type": "malware",
+      "spec_version": "2.1",
+      "is_family": true,
+      "id": "malware--61a62a6a-9a18-4758-8e52-622431c4b8ae",
+      "created": "2020-02-20",
+      "modified": "2021-07-20",
+      "name": "NOBELIUM Variant (SUNBURST backdoor malware)",
+      "description": " The Solorigate backdoor malware, the compromised DLL that was deployed on networks as part of SolarWinds products, that allowed attackers to gain backdoor access to affected devices.",
+      "malware_types": [
+        "Remote-Access-Trojan"
+      ]
+    },
+ {
+      "type": "malware",
+      "spec_version": "2.1",
+      "is_family": true,
+      "id": "malware--61a62a6a-9a18-4758-8e52-622431c4b8ae",
+      "created": "2021-03-15",
+      "modified": "2021-03-15",
+      "name": "NOBELIUM Variant (GoldMax, GoldFinder, and Sibot)",
+      "description": " The malware writes an encrypted configuration file to disk, where the file name and AES-256 cipher keys are unique per implant and based on environmental variables and information about the network where it is running.",
+      "malware_types": [
+        "Remote-Access-Trojan"
+      ]
+    },
+
+{
+   
+      "type": "indicator",
+      "spec_version": "2.1",
+      "pattern_type": "stix",
+      "id": "indicator--e8094b09-7df4-4b13-b207-1e27af3c4bde",
+       "created": "2017-05-31",
+      "modified": "2021-07-11",
+      "name": "FoggyWeb Loader ( MD5 ,SHA1,SHA 256)",
+      "description": "(The file version.dll is a malicious loader responsible for loading an encrypted backdoor file from the file system, decrypting the backdoor  file, and loading it in memory.)",
+      
+      "indicator_types": [
+        "malicious-activity",
+        "attribution"
+      ]
+      
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "pattern_type": "stix",
+      "id": "indicator--745e1537-b4f3-49da-9f64-df6b1b5df190",
+      "created": "2015-05-15T09:12:16.432Z",
+      "modified": "2015-05-15T09:12:16.432Z",
+      "name": "Appendix E MD5 hash 'c896ece073dd01191cbc1d462bc2f47161828a83'",
+      "description": "Test description.",
+      "pattern": "[file:hashes.md5 = 'c896ece073dd01191cbc1d462bc2f47161828a83']",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "valid_from": "2015-05-15T09:12:16.432678Z"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "pattern_type": "stix",
+      "id": "indicator--745e1537-b4f3-49da-9f64-df6b1b5df191",
+      "created": "2015-05-15T09:12:16.432Z",
+      "modified": "2015-05-15T09:12:16.432Z",
+      "name": "Appendix E SHA 256 hash '231b5517b583de102cde59630c3bf938155d17037162f663874e4662af2481b1'",
+      "description": "Test description.",
+      "pattern": "[file:hashes.SHA 256 = '231b5517b583de102cde59630c3bf938155d17037162f663874e4662af2481b1']",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "valid_from": "2015-05-15T09:12:16.432678Z"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "pattern_type": "stix",
+      "id": "indicator--745e1537-b4f3-49da-9f64-df6b1b5df192",
+      "created": "2015-05-15T09:12:16.432Z",
+      "modified": "2015-05-15T09:12:16.432Z",
+      "name": "Appendix E MD5 hash '5d5a1b4fafaf0451151d552d8eeb73ec'",
+      "description": "Test description.",
+      "pattern": "[file:hashes.md5 = '5d5a1b4fafaf0451151d552d8eeb73ec']",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "valid_from": "2015-05-15T09:12:16.432678Z"
+    },
+
+
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "pattern_type": "stix",
+      "id": "indicator--329ae6e9-25bd-49e8-89d1-aae4ca52e4a7",
+      "created": "2017-05-31",
+      "modified": "2021-07-11",
+      "name": "FoggyWeb Backdoor Encryption",
+      "description": "(This malicious memory-resident DLL (originally named Microsoft.IdentityServer.WebExtension.dll by its developer) functions as a backdoor targeting AD FS. It is loaded  by the main AD FS service process Microsoft.IdentityServer.ServiceHost.exe through a malicious loader component.)",
+      
+      "indicator_types": [
+        "malicious-activity",
+        "attribution"
+      ],
+      "valid_from": "2015-05-15T09:12:16.432678Z"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "pattern_type": "stix",
+      "id": "indicator--1dbe6ed0-c305-458f-9cce-f83c678f5afd",
+      "created": "2017-05-31",
+      "modified": "2021-07-11",
+      "name": "Appendix E MD5 hash '9ff9401315d0f7258a9fcde0cfdef02b'",
+      "description": "Test description.",
+      "pattern": "[file:hashes.md5 = '9ff9401315d0f7258a9fcde0cfdef02b']",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "valid_from": "2015-05-15T09:12:16.432678Z"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "pattern_type": "stix",
+      "id": "indicator--1dbe6ed0-c305-458f-9cce-f83c678f5afX",
+      "created": "2017-05-31",
+      "modified": "2021-07-11",
+      "name": "Appendix E SHA 1 hash '4597431f26424cb814c917168fa8d74d01ab7cd1'",
+      "description": "Test description.",
+      "pattern": "[file:hashes.SHA 1 = '4597431f26424cb814c917168fa8d74d01ab7cd1']",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "valid_from": "2015-05-15T09:12:16.432678Z"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "pattern_type": "stix",
+      "id": "indicator--1dbe6ed0-c305-458f-9cce-f83c678f5afS",
+      "created": "2017-05-31",
+      "modified": "2021-07-11",
+      "name": "Appendix E SHA 256 hash 'da0be762bb785085d36aec80ef1697e25fb15414514768b3bcaf798dd9c9b169'",
+      "description": "Test description.",
+      "pattern": "[file:hashes.SHA 256 = 'da0be762bb785085d36aec80ef1697e25fb15414514768b3bcaf798dd9c9b169']",
+      "indicator_types": [
+        "malicious-activity"
+      ],
+      "valid_from": "2015-05-15T09:12:16.432678Z"
+    },
+    
+     
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "pattern_type": "stix",
+      "id": "indicator--54e1e351-fec0-41a4-b62c-d7f86101e241",
+       "created": "2017-05-31",
+      "modified": "2021-07-11",
+      "name": "FoggyWeb Backdoor Decryption",
+      "description": "(the backdoor treats the decoded data as a .NET-based assembly/payload and proceeds to call its Service.ExecuteBinary() method to load and execute the DLL payload in memory. After loading the DLL in memory, ExecuteBinary() proceeds to invoke a specific method from the loaded DLL. The method name and parameters needed to invoke the method are supplied to the backdoor within the decoded SignatureValue data.)",
+      "indicator_types": [
+        "malicious-activity",
+        "attribution"
+      ]
+      
+    },
+{    
+    "type": "indicator",
+    "spec_version": "2.1",
+    "pattern_type": "stix",
+    "id": "indicator--8d12f44f-8ac0-4b12-8b4a-3699ca8c9691",
+    "created": "2017-05-31",
+      "modified": "2021-07-11",
+    "name": "Appendix E MD5 hash 'e9671d294ce41fe6dbb9637dc0157a88'",
+    "description": "Test description.",
+    "pattern": "[file:hashes.md5 = 'e9671d294ce41fe6dbb9637dc0157a88']",
+    "indicator_types": [
+      "malicious-activity"
+    ],
+    "valid_from": "2017-05-31"
+  },
+  {    
+    "type": "indicator",
+    "spec_version": "2.1",
+    "pattern_type": "stix",
+    "id": "indicator--8d12f44f-8ac0-4b12-8b4a-3699ca8c969G",
+    "created": "2017-05-31",
+      "modified": "2021-07-11",
+    "name": "Appendix E MD5 hash '85cfeccbb48fd9f498d24711c66e458e0a80cc90'",
+    "description": "Test description.",
+    "pattern": "[file:hashes.md5 = '85cfeccbb48fd9f498d24711c66e458e0a80cc90']",
+    "indicator_types": [
+      "malicious-activity"
+    ],
+    "valid_from": "2017-05-31"
+  },
+  {    
+    "type": "indicator",
+    "spec_version": "2.1",
+    "pattern_type": "stix",
+    "id": "indicator--8d12f44f-8ac0-4b12-8b4a-3699ca8c969A",
+    "created": "2017-05-31",
+      "modified": "2021-07-11",
+    "name": "Appendix E MD5 hash '568392bd815de9b677788addfc4fa4b0a5847464b9208d2093a8623bbecd81e6'",
+    "description": "Test description.",
+    "pattern": "[file:hashes.md5 = '568392bd815de9b677788addfc4fa4b0a5847464b9208d2093a8623bbecd81e6']",
+    "indicator_types": [
+      "malicious-activity"
+    ],
+    "valid_from": "2017-05-31"
+  },
+    
+    {
+      "type": "vulnerability",
+      "spec_version": "2.1",
+      "id": "vulnerability--c7cab3fb-0822-43a5-b1ba-c9bab34361a2",
+      "created": "2017-05-31",
+      "modified": "2021-07-11",
+      "name":  "CVE-2021-45492",
+      "description": "DLL search order hijacking method used by APT 29",
+      "external_references": [
+        {
+          "source_name": "cve",
+          "external_id": "CVE-2021-45492"
+        }
+      ]
+    },
+   
+    {
+      "type": "report",
+      "spec_version": "2.1",
+      "id": "report--f2b63e80-b523-4747-a069-35c002c690db",
+      "created_by_ref": "identity--81cade27-7df8-4730-836b-62d880e6d9d3",
+      "created": "2021-03-15",
+      "modified": "2021-05-15",
+      "name": "FoggyWeb: Targeted NOBELIUM malware leads to persistent backdoor",
+      "report_types": [
+        "threat-report",
+        "malware"
+      ],
+      "published": "2021-09-21",
+      "description": "This report spotlights FoggyWeb : Targeted NOBELIUM malware leads to persistent backdoor,  NOBELIUM can draw from significant operational resources often showcased in their campaigns, including custom-built malware and tools. In March 2021,NOBELIUM malware: a post-exploitation backdoor that Microsoft Threat Intelligence Center (MSTIC) refers to as FoggyWeb. As mentioned in previous blogs, NOBELIUM employs multiple tactics to pursue credential theft with the objective of gaining admin-level access to Active Directory Federation Services (AD FS) servers. Once NOBELIUM obtains credentials and successfully compromises a server, the actor relies on that access to maintain persistence and deepen its infiltration using sophisticated malware and tools. NOBELIUM uses FoggyWeb to remotely exfiltrate the configuration database of compromised AD FS servers, decrypted  token-signing certificate, and token-decryption certificate, as well as to download and execute additional components. Use of FoggyWeb has been observed in the wild as early as April 2021.Microsoft security  products have implemented detections and protections against this malware. Indicators of compromise (IOCs), mitigation guidance, detection details, and hunting queries for Azure Sentinel and Microsoft 365   Defender customers are provided at the end of this analysis and in the product portals. Active Directory Federation Services (AD FS) servers run on-premises and customers can also follow detailed guidance    on securing AD FS servers against attacks." ,
+      "object_refs": [
+        "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920",
+        "malware--61a62a6a-9a18-4758-8e52-622431c4b8ae",
+        "malware--61a62a6a-9a18-4758-8e52-622431c4b8aw",       
+        "identity--81cade27-7df8-4730-836b-62d880e6d9d3",
+        "campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+        "attack-pattern--19da6e1c-69a8-4c2f-886d-d620d09d3b5a",
+        "attack-pattern--e13f3e6d-4f9c-4265-b1cf-f997a1bf7828",
+        "attack-pattern--e13f3e6d-4f9c-4265-b1cf-f997a1bf7827",
+        "attack-pattern--0bea2358-c244-4905-a664-a5cdce7bb767",
+        "attack-pattern--5728f45b-2eca-4942-a7f6-bc4267c1ab8d",
+        "attack-pattern--7151c6d0-7e97-47ce-9290-087315ea3db7",
+        "attack-pattern--e13f3e6d-4f9c-4265-b1cf-f997a1bf7827",
+        "course-of-action--70b3d5f6-374b-4488-8688-729b6eedac5b",
+        "indicator--e8094b09-7df4-4b13-b207-1e27af3c4bde",
+        "indicator--329ae6e9-25bd-49e8-89d1-aae4ca52e4a7",
+        "indicator--54e1e351-fec0-41a4-b62c-d7f86101e241",
+        "indicator--8d12f44f-8ac0-4b12-8b4a-3699ca8c9691",
+        "indicator--745e1537-b4f3-49da-9f64-df6b1b5df190",
+        "indicator--745e1537-b4f3-49da-9f64-df6b1b5df191",
+        "indicator--745e1537-b4f3-49da-9f64-df6b1b5df192",
+        "indicator--1dbe6ed0-c305-458f-9cce-f83c678f5afd",
+        "indicator--1dbe6ed0-c305-458f-9cce-f83c678f5afX",
+        "indicator--1dbe6ed0-c305-458f-9cce-f83c678f5afS",
+        "indicator--8d12f44f-8ac0-4b12-8b4a-3699ca8c9699",
+        "indicator--8d12f44f-8ac0-4b12-8b4a-3699ca8c969G",
+        "indicator--8d12f44f-8ac0-4b12-8b4a-3699ca8c969A",
+        "vulnerability--c7cab3fb-0822-43a5-b1ba-c9bab34361a2",
+        "relationship--26c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+        "relationship--134c393e-cbe0-433c-9a7a-95263ed8578f",
+        "relationship--263e38f4-8ecb-414f-b3c4-0f045d1be5ea",
+        "relationship--263e38f4-8ecb-414f-b3c4-0f045d1be5eb",
+        "relationship--d70ebcc3-5640-423d-b9b0-7158c532c040",
+        "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5f5",
+        "relationship--31c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+        "relationship--d7d9952c-4443-4711-a48c-7009a0f0f8ea",
+        "relationship--263e38f4-8ecb-414f-b3c4-0f045d1be5ed",
+        "relationship--4f784f2f-7d8e-4f12-9ddd-b685055f8076",
+        "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5f6",
+        "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5f7",
+        "relationship--32c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+        "relationship--263e38f4-8ecb-414f-b3c4-0f045d1be5ef",
+        "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5f8",
+        "relationship--a91f3d5c-ceac-44cf-b92b-efb819241606",
+        "relationship--4e726ced-0207-4196-8a14-4400c09b039e",
+        "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5f9",
+        "relationship--263e38f4-8ecb-414f-b3c4-0f045d1be5eg",
+        "relationship--29c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+        "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5fa",
+        "relationship--263e38f4-8ecb-414f-b3c4-0f045d1be5ee",
+        "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5fb",
+        "relationship--30c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+        "relationship--263e38f4-8ecb-414f-b3c4-0f045d1be5eh",
+        "relationship--263e38f4-8ecb-414f-b3c4-0f045d1be5ei",
+        "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5fc",
+        "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5fd",
+        "relationship--dc37f2bb-1a45-48b1-864e-c34dcde75d1d",
+        "relationship--78f110e6-2cd6-442e-971f-a2ff40c3b843",
+        "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5fe",
+        "relationship--263e38f4-8ecb-414f-b3c4-0f045d1be5ec",
+        "relationship--27c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+        "relationship--28c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+        "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5ff",
+        "relationship--263e38f4-8ecb-414f-b3c4-0f045d1be5ek"
+        
+      ]
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--26c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "uses",
+      "source_ref": "campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+      "target_ref":  "attack-pattern--19da6e1c-69a8-4c2f-886d-d620d09d3b5a"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--27c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "uses",
+      "source_ref": "campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+      "target_ref": "attack-pattern--e13f3e6d-4f9c-4265-b1cf-f997a1bf7828"
+      
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--28c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "uses",
+      "source_ref": "campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+      "target_ref":  "attack-pattern--e13f3e6d-4f9c-4265-b1cf-f997a1bf7827"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--29c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "uses",
+      "source_ref": "campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+      "target_ref":  "attack-pattern--0bea2358-c244-4905-a664-a5cdce7bb767"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--30c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "uses",
+      "source_ref": "campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+      "target_ref":  "attack-pattern--5728f45b-2eca-4942-a7f6-bc4267c1ab8d"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--31c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "uses",
+      "source_ref": "campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+      "target_ref":  "attack-pattern--e13f3e6d-4f9c-4265-b1cf-f997a1bf7827"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--32c5311c-9d9b-4b9b-b3b5-bac10e16a7a3",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "uses",
+      "source_ref": "campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+      "target_ref":  "attack-pattern--7151c6d0-7e97-47ce-9290-087315ea3db7"
+      
+    },
+    
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--134c393e-cbe0-433c-9a7a-95263ed8578f",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "mitigates",
+      "source_ref":  "course-of-action--70b3d5f6-374b-4488-8688-729b6eedac5b",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--a91f3d5c-ceac-44cf-b92b-efb819241606",
+       "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "uses",
+      "source_ref":"campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+      "target_ref":"malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--900b11dc-bfa7-4dea-adb6-0e8d726b4ded",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--e8094b09-7df4-4b13-b207-1e27af3c4bde",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--900b11dc-bfa7-4dea-adb6-0e8d726b4dea",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8d12f44f-8ac0-4b12-8b4a-3699ca8c9691",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--900b11dc-bfa7-4dea-adb6-0e8d726b4deb",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref":  "indicator--745e1537-b4f3-49da-9f64-df6b1b5df190",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--900b11dc-bfa7-4dea-adb6-0e8d726b4dec",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref":  "indicator--745e1537-b4f3-49da-9f64-df6b1b5df191",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--900b11dc-bfa7-4dea-adb6-0e8d726b4dee",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref":  "indicator--745e1537-b4f3-49da-9f64-df6b1b5df192",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--900b11dc-bfa7-4dea-adb6-0e8d726b4def",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--1dbe6ed0-c305-458f-9cce-f83c678f5afd",
+      
+      
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--900b11dc-bfa7-4dea-adb6-0e8d726b4deg",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--1dbe6ed0-c305-458f-9cce-f83c678f5afX",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--900b11dc-bfa7-4dea-adb6-0e8d726b4deh",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--1dbe6ed0-c305-458f-9cce-f83c678f5afS",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--900b11dc-bfa7-4dea-adb6-0e8d726b4dei",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref":  "indicator--8d12f44f-8ac0-4b12-8b4a-3699ca8c9699",
+      
+      
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--900b11dc-bfa7-4dea-adb6-0e8d726b4dej",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8d12f44f-8ac0-4b12-8b4a-3699ca8c969G",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--900b11dc-bfa7-4dea-adb6-0e8d726b4dek",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8d12f44f-8ac0-4b12-8b4a-3699ca8c969A",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+ {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5f6",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8da68996-f175-4ae0-bd74-aad4913873b8",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5f7",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8da68996-f175-4ae0-bd74-aad4913873b8",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5f8",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8da68996-f175-4ae0-bd74-aad4913873b8",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5f9",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8da68996-f175-4ae0-bd74-aad4913873b8",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5fa",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8da68996-f175-4ae0-bd74-aad4913873b8",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5fb",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8da68996-f175-4ae0-bd74-aad4913873b8",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5fc",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8da68996-f175-4ae0-bd74-aad4913873b8",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5fd",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8da68996-f175-4ae0-bd74-aad4913873b8",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5fe",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8da68996-f175-4ae0-bd74-aad4913873b8",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--1a2a3630-5764-4d6e-a3c3-cb4ca27ff5ff",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--8da68996-f175-4ae0-bd74-aad4913873b8",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--8076ec7c-f6f6-4dca-a239-8bb6b5ad0c10",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--54e1e351-fec0-41a4-b62c-d7f86101e241",
+      "target_ref": "campaign--752c225d-d6f6-4456-9130-d9580fd4007b"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--0dd66a71-c45b-4786-bd7b-92cf952afdc1",
+       "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--329ae6e9-25bd-49e8-89d1-aae4ca52e4a7",
+      "target_ref": "campaign--752c225d-d6f6-4456-9130-d9580fd4007b"
+    },
+  {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--0dd66a71-c45b-4786-bd7b-92cf952afdc1",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--54e1e351-fec0-41a4-b62c-d7f86101e241",
+      "target_ref": "campaign--752c225d-d6f6-4456-9130-d9580fd4007b"
+    },
+    {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--78f110e6-2cd6-442e-971f-a2ff40c3b843",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref": "indicator--329ae6e9-25bd-49e8-89d1-aae4ca52e4a7",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+ {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--dc37f2bb-1a45-48b1-864e-c34dcde75d1d",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref":  "indicator--e8094b09-7df4-4b13-b207-1e27af3c4bde",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+ {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id":  "relationship--d7d9952c-4443-4711-a48c-7009a0f0f8ea",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "indicates",
+      "source_ref":  "indicator--54e1e351-fec0-41a4-b62c-d7f86101e241",
+      "target_ref": "malware--591f0cb7-d66f-4e14-a8e6-5927b597f920"
+    },
+  {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--d70ebcc3-5640-423d-b9b0-7158c532c040",
+       "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "targets",
+      "source_ref":  "campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+      "target_ref": "vulnerability--c7cab3fb-0822-43a5-b1ba-c9bab34361a2"
+    },
+ {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--4e726ced-0207-4196-8a14-4400c09b039e",
+       "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "targets",
+      "source_ref":  "attack-pattern--19da6e1c-69a8-4c2f-886d-d620d09d3b5a",
+      "target_ref": "vulnerability--c7cab3fb-0822-43a5-b1ba-c9bab34361a2"
+    },
+ {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id": "relationship--4f784f2f-7d8e-4f12-9ddd-b685055f8076",
+      "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "uses",
+      "source_ref":"campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+      "target_ref":"malware--61a62a6a-9a18-4758-8e52-622431c4b8ae"
+    },
+ {
+      "type": "relationship",
+      "spec_version": "2.1",
+      "id":  "relationship--263e38f4-8ecb-414f-b3c4-0f045d1be5ed",
+       "created": "2021-11-15",
+      "modified": "2022-05-15",
+      "relationship_type": "uses",
+      "source_ref":"campaign--721976f9-56d7-4749-8c69-b3ac7c315f05",
+      "target_ref": "malware--61a62a6a-9a18-4758-8e52-622431c4b8aw"
+    }
+]
+}
